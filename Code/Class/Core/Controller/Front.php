@@ -29,6 +29,10 @@ class Front
             $controllerName = '\\App\\Controller\\ErrorController';
             $actionName = 'e404';
         }
+        if (!method_exists($controllerName,$actionName)){
+            $controllerName = '\\App\\Controller\\ErrorController';
+            $actionName = 'errorMethod';
+        }
         $controller = new $controllerName;
         $controller->$actionName();
     }

@@ -11,4 +11,9 @@ class ErrorController
 
     }
 
+    public function errorMethod()
+    {
+        var_dump('Method not exists');
+    }
+
 }

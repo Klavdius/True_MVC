@@ -13,5 +13,11 @@ class MasterUrl
         return $arrUrl;
     }
 
+    public function varPrint($name)
+    {
+        echo '<pre>';
+        var_dump($name);
+        echo '</pre>';
+    }
 
 }

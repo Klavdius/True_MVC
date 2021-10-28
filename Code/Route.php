@@ -19,7 +19,7 @@ class Route
     {
         $dispatcher = new \Core\Controller\Front();
         $dispatcher->dispatch();
-
+//        phpinfo();
     }
 }
 
