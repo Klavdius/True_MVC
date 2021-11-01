@@ -3,28 +3,32 @@
 namespace App\Controller;
 
 use App\Controller\RandomizerController;
-use Core\Tools\MasterUrl;
+use App\Controller\ViewController;
 
-class TableController
+class TableController extends \Core\Controller\Controller
 {
 
     private $random;
     private $print;
+    private $tableView;
+    private $arrFirst;
+    private $arrSecond;
 
 
     public function __construct()
     {
         $this->random = new \App\Controller\RandomizerController();
-        $this->print = new MasterUrl();
+        //$this->tableView = new \App\Controller\ViewController();
     }
 
     public function tableAction()
     {
+        $this->varPrint('ara ara ara второй способ');
 
-       $this->print->varPrint($this->random->getArrFirst());
-       $this->print->varPrint($this->random->getArrSecond());
-       $this->print->varPrint($this->random->getArrDeck());
-
+        $this->varPrint($this->random->getArrFirst());
+        $this->varPrint($this->random->getArrSecond());
+        $this->varPrint($this->random->getArrDeck());
+       
 
      }
 

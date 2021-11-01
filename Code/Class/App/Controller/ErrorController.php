@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-class ErrorController
+class ErrorController extends \Core\Model\Request
 {
 
     public function e404()

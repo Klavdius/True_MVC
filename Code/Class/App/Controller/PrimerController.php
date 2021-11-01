@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-class PrimerController
+class PrimerController extends \Core\Model\Request
 {
 
     public function urlAction()

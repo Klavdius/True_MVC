@@ -1,0 +1,31 @@
+<?php
+namespace App\View;
+
+use App\Controller\TableController;
+class ViewTable
+{
+    private $table;
+    private $dFerst;
+    private $dSecond;
+
+    public function __construct()
+    {
+        $this->table = new TableController();
+        $this->dFerst = $this->table->getArrFirst();
+        $this->dSecond = $this->table->getArrSecond();
+    }
+
+    public function page()
+    {
+
+
+    }
+
+}
+
+?>
+
+
+
+
+

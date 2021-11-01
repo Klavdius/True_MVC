@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-class DefaultController
+class DefaultController extends \Core\Model\Request
 {
     public function defaultAction()
     {

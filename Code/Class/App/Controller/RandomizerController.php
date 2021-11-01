@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Core\Tools\MasterUrl;
 
-class RandomizerController
+class RandomizerController extends \Core\Model\Request
 {
     private $arrDeck;
     private $countFirst;
@@ -20,10 +20,7 @@ class RandomizerController
         $this->printVar = new MasterUrl();
         $this->buildDeck();
         $this->startPull();
-        $this->arrDeck;
-
     }
-
 
     public function numberAction()
     {
@@ -52,19 +49,13 @@ class RandomizerController
     {
         return is_null($number) ? $this->arrSecond : ( (array_key_exists($number,$this->arrSecond)) ? $this->arrSecond[$number] : null);
     }
+
     public function startPull()
     {
-        for ($i = 0; $i < 13; $i++) {
-            $i == 0 ? $this->arrFirst[$i] = $this->arrDeck[$i] :( (fmod($i, 2) == 0) ? $this->arrFirst[$i] = $this->arrDeck[$i] : $this->arrFirst[$i] = null);
+        for ($i = 0; $i < 7; $i++) {
+            $this->arrFirst[$i] = array_shift($this->arrDeck);
+            $this->arrSecond[$i] = array_shift($this->arrDeck);
         }
-        $this->arrFirst = array_values(array_diff($this->arrFirst, [null]));
-
-        for ($i = 0; $i < 15; $i++) {
-             ($i == 1) ? $this->arrSecond[$i] = $this->arrDeck[$i] : ( (!fmod($i, 2) == 0) ? $this->arrSecond[$i] = $this->arrDeck[$i] : $this->arrSecond[$i] = null );
-        }
-        $this->arrSecond = array_values(array_diff($this->arrSecond, [null]));
-
-        $this->arrDeck = array_values(array_diff(array_diff($this->arrDeck,$this->arrFirst),$this->arrSecond));
     }
 
 

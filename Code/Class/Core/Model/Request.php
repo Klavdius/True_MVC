@@ -2,8 +2,6 @@
 
 namespace Core\Model;
 
-use Core\Tools\MasterUrl;
-
 class Request
 {
     private $controllerName;
@@ -22,23 +20,18 @@ class Request
 
     private function parseUri()
     {
-        $url = trim(str_replace('/index.php','', $this->getRequestUri()));
-        $arrUrl = array_filter(MasterUrl::UrlSplit($url));
+        $url = trim(str_replace('/index.php','', $this->getRequestUri()),"/ ");
+        $url = explode('?',$url);
+        $arrUrl = explode('/', $url[0]);
 
-        switch (count($arrUrl)) {
-            case 2:
-                $this->controllerName = $arrUrl[0];
-                $this->actionName = $arrUrl[1];
-                break;
-            case 1:
-                $this->controllerName = $arrUrl[0];
-                $this->actionName = 'default';
-                break;
-            default:
-                $this->controllerName = 'Default';
-                $this->actionName = 'default';
-                break;
+        $this->controllerName = (!empty($arrUrl[0])) ? array_shift($arrUrl) : 'Default';
+        $this->actionName = (!empty($arrUrl[0])) ? array_shift($arrUrl) : 'default';
+
+        while (!empty($arrUrl))
+        {
+            $this->get[array_shift($arrUrl)] = array_shift($arrUrl);
         }
+
 
     }
 
@@ -48,6 +41,7 @@ class Request
     }
 
     /**
+     * @param null $name
      * @return array
      */
     public function getGet($name = null)
@@ -72,6 +66,7 @@ class Request
     }
 
     /**
+     * @param null $name
      * @return array
      */
     public function getArrServer($name = null)

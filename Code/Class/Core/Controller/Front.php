@@ -20,11 +20,9 @@ class Front
 
     public function dispatch()
     {
-
-
         $controllerName = '\\App\\Controller\\' . $this->request->getControllerName() . 'Controller';
         $actionName = $this->request->getActionName() . 'Action';
-        var_dump($controllerName);
+
         if (!class_exists($controllerName)) {
             $controllerName = '\\App\\Controller\\ErrorController';
             $actionName = 'e404';
@@ -34,6 +32,7 @@ class Front
             $actionName = 'errorMethod';
         }
         $controller = new $controllerName;
+        $controller->setRequest($this->getRequest());
         $controller->$actionName();
     }
 
