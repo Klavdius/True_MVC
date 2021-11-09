@@ -27,6 +27,30 @@ class Layout
              */
             $this->loadedLayout = array_replace_recursive($this->loadedLayout, $content);
         }
+
+        return $this;
+    }
+
+    public function render()
+    {
+        $tree = $this->buildTree($this->loadedLayout[self::ROOT_NODE]);
+        $tree->toHtml();
+    }
+
+    public function buildTree($node)
+    {
+        $block = new $node['type'];
+        /**
+         * @var $block \Core\Block\Template
+         */
+        $block->setTemplate($node['template']);
+        if(isset($node['children'])){
+            foreach ($node['children'] as $name => $child){
+                $block->addChild($name, $this->buildTree($child));
+            }
+        }
+
+        return $block;
     }
 }
 

@@ -35,4 +35,11 @@ class Template
         return $this;
     }
 
+    public function toHtml()
+    {
+        if($this->getTemplate()){
+          include str_replace('/', DS,BD . DS . self::TEMPLATE_PATH . DS . $this->getTemplate());
+        }
+    }
+
 }
