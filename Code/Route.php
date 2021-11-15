@@ -17,9 +17,9 @@ class Route
 
     public static function Run()
     {
-        $dispatcher = new \Core\Controller\Front();
-        $dispatcher->dispatch();
-//        phpinfo();
+//        $dispatcher = new \Core\Controller\Front();
+//        $dispatcher->dispatch();
+        phpinfo();
     }
 }
 

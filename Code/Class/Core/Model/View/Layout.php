@@ -21,11 +21,14 @@ class Layout
         foreach ($filesToParse as $file) {
             $content = include BD . DS . self::LAYOUT_PATH . DS . $file;
             /**
-             * положим в loadedLayout содержимое файлов, чьи названия нам пришли
-             * первым массивом всегда наш дефолт ( base_layout). Он задает основу. затем идёт второй файл из pathToLayout.
+             * положим в loadedLayout содержимое файлов,
+             * чьи названия нам пришли
+             * первым массивом всегда наш дефолт ( base_layout).
+             * Он задает основу. затем идёт второй файл из pathToLayout.
              * Он меняет информацию. они должны лежать в Лаяут патче.
              */
             $this->loadedLayout = array_replace_recursive($this->loadedLayout, $content);
+
         }
 
         return $this;
