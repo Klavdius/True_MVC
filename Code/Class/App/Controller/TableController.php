@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Helper\Labels;
+use Core\Factory;
 use App\Controller\RandomizerController;
 use App\Controller\ViewController;
 
@@ -18,6 +20,7 @@ class TableController extends \Core\Controller\Controller
     public function __construct()
     {
         $this->random = new \App\Controller\RandomizerController();
+
         //$this->tableView = new \App\Controller\ViewController();
     }
 
@@ -28,7 +31,7 @@ class TableController extends \Core\Controller\Controller
         $this->varPrint($this->random->getArrFirst());
         $this->varPrint($this->random->getArrSecond());
         $this->varPrint($this->random->getArrDeck());
-       
+
 
      }
 
