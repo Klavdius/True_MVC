@@ -3,6 +3,7 @@
 namespace App\View\Block\Content;
 
 use App\Controller\TableController;
+use Core\Factory;
 
 class Top extends \Core\Block\Template
 {
@@ -10,6 +11,14 @@ class Top extends \Core\Block\Template
     private $arrFirst;
     private $arrDeck;
     private $arrSecond;
+    private $factory;
+
+    public function __construct()
+    {
+        $this->factory = new Factory();
+        $this->arrSecond = $this->factory->createSingleton(RandomizerController::arrSecond);
+
+    }
 
     public function hello()
     {
@@ -20,22 +29,6 @@ class Top extends \Core\Block\Template
        }
     }
 
-    public function buildDeck()
-    {
-        for ($i = 0; $i < 60; $i++) {
-            $this->arrDeck[$i] = $i;
-        }
-        shuffle($this->arrDeck);
-    }
-
-    public function startPull()
-    {
-        for ($i = 0; $i < 7; $i++) {
-            $this->arrFirst[$i] = array_shift($this->arrDeck);
-            $this->arrSecond[$i] = array_shift($this->arrDeck);
-        }
-
-    }
 
     public function getArrFirst($number = null)
     {
