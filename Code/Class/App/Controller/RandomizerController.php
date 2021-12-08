@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Core\Tools\MasterUrl;
-
+use Core\Factory;
 class RandomizerController extends \Core\Model\Request
 {
     private $arrDeck;
@@ -14,12 +14,15 @@ class RandomizerController extends \Core\Model\Request
     private $arrFirst;
     private $arrSecond;
     private $printVar;
+    private $factory;
 
     public function __construct()
     {
         $this->printVar = new MasterUrl();
+        $this->factory = new Factory();
         $this->buildDeck();
         $this->startPull();
+        $this->factory->createSingleton($this);
     }
 
     public function numberAction()
