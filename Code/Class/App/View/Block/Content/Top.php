@@ -30,7 +30,8 @@ class Top extends \Core\Block\Template
            echo $name;
            echo '<br>';
        }
-
+        echo "------";
+        echo '<br>';
         foreach ($this->arrSecond as $name)
         {
             echo $name;

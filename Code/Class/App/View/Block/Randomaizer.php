@@ -2,7 +2,7 @@
 
 namespace App\View\Block;
 
-use Core\Factory;
+
 
 class Randomaizer extends \Core\Model\Request
 {
@@ -13,9 +13,7 @@ class Randomaizer extends \Core\Model\Request
 
     public function __construct()
     {
-        $this->factory = new Factory();
-        $this->factory::createSingleton($this);
-        echo "1";
+       echo "1";
     }
 
     private function buildDeck()
@@ -47,34 +45,40 @@ class Randomaizer extends \Core\Model\Request
         return null;
     }
 
-    public function getArrFirst($number = null)
+    public static function getArrFirst($number = null)
     {
         static $arrFirst = null;
         if (is_null($arrFirst)){
+            $arrDeck = Randomaizer::getArrDeck();
             for ($i = 0; $i < 7; $i++) {
-                $arrDeck = $this->getArrDeck();
-                $this->$arrFirst[$i] = array_shift($arrDeck);
+                $arrFirst[$i] = array_shift($arrDeck);
             }
         }
         return is_null($number) ? $arrFirst : ( (array_key_exists($number, $arrFirst))  ? $arrFirst[$number] : null) ;
     }
 
-    public function getArrSecond($number = null)
+    public static function getArrSecond($number = null)
     {
         static $arrSecond = null;
         if (is_null($arrSecond)){
+            $arrDeck = Randomaizer::getArrDeck();
             for ($i = 0; $i < 7; $i++) {
-                $arrDeck = $this->getArrDeck();
-                $this->$arrSecond[$i] = array_shift($arrDeck);
+                $arrSecond[$i] = array_shift($arrDeck);
             }
         }
         return is_null($number) ? $arrSecond : ( (array_key_exists($number,$arrSecond)) ? $arrSecond[$number] : null);
     }
 
-    public function getArrDeck()
+    public static function getArrDeck()
     {
         static $arrDeck = null;
-        !is_null($arrDeck) ?: $arrDeck = $this->buildDeck();
+        if (is_null($arrDeck))
+        {
+            for ($i = 0; $i < 60; $i++) {
+                $arrDeck[$i] = $i;
+                shuffle($arrDeck);
+            }
+        }
         return $arrDeck;
     }
 
