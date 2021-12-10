@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Helper\Labels;
 use Core\Factory;
-use App\Controller\RandomizerController;
 use Core\Model\View\Layout;
 
 class TableController extends \Core\Controller\Controller
@@ -20,12 +19,7 @@ class TableController extends \Core\Controller\Controller
 
     public function __construct()
     {
-        $this->random = new \App\Controller\RandomizerController();
 
-        $this->setArrFirst($this->random->getArrFirst());
-        $this->setArrSecond();
-
-        //$this->tableView = new \App\Controller\ViewController();
     }
 
     public function tableAction()

@@ -3,6 +3,7 @@
 namespace App\View\Block\Content;
 
 use App\Controller\TableController;
+use App\View\Block\Randomaizer;
 use Core\Factory;
 
 class Top extends \Core\Block\Template
@@ -11,13 +12,15 @@ class Top extends \Core\Block\Template
     private $arrFirst;
     private $arrDeck;
     private $arrSecond;
+
     private $factory;
+    private $random;
 
     public function __construct()
     {
-        $this->factory = new Factory();
-        $this->arrSecond = $this->factory->createSingleton(RandomizerController::arrSecond);
-
+        $this->random = new Randomaizer();
+        $this->arrSecond = $this->random::getArrSecond();
+        $this->arrFirst = $this->random::getArrFirst();
     }
 
     public function hello()
@@ -27,6 +30,13 @@ class Top extends \Core\Block\Template
            echo $name;
            echo '<br>';
        }
+
+        foreach ($this->arrSecond as $name)
+        {
+            echo $name;
+            echo '<br>';
+        }
+
     }
 
 
