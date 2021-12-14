@@ -13,16 +13,7 @@ class Randomaizer extends \Core\Model\Request
 
     public function __construct()
     {
-       echo "1";
-    }
 
-    private function buildDeck()
-    {
-        for ($i = 0; $i < 60; $i++) {
-            $this->arrDeck[$i] = $i;
-            shuffle($this->arrDeck);
-        }
-        return $this->arrDeck;
     }
 
     public static function createSingleton(string $classname)
@@ -50,8 +41,10 @@ class Randomaizer extends \Core\Model\Request
         static $arrFirst = null;
         if (is_null($arrFirst)){
             $arrDeck = Randomaizer::getArrDeck();
+            $j = 0;
             for ($i = 0; $i < 7; $i++) {
-                $arrFirst[$i] = array_shift($arrDeck);
+                $arrFirst[$i] = $arrDeck[$j];
+                $j +=2;
             }
         }
         return is_null($number) ? $arrFirst : ( (array_key_exists($number, $arrFirst))  ? $arrFirst[$number] : null) ;
@@ -62,13 +55,34 @@ class Randomaizer extends \Core\Model\Request
         static $arrSecond = null;
         if (is_null($arrSecond)){
             $arrDeck = Randomaizer::getArrDeck();
+            $j = 1;
             for ($i = 0; $i < 7; $i++) {
-                $arrSecond[$i] = array_shift($arrDeck);
+
+                $arrSecond[$i] = $arrDeck[$j];
+                $j +=2;
             }
         }
         return is_null($number) ? $arrSecond : ( (array_key_exists($number,$arrSecond)) ? $arrSecond[$number] : null);
     }
 
+    public static function getBattelfild($number = null)
+    {
+        static $battelfild = null;
+        if (is_null($battelfild))
+        {
+            $battelfild[0] = "Равнины";
+            $battelfild[1] = "Холмы";
+            $battelfild[2] = "Крепость";
+            $battelfild[3] = "Замок";
+            $battelfild[4] = "Город";
+            $battelfild[5] = "Сторожевая башня";
+            $battelfild[6] = "Болото";
+            $battelfild[7] = "Река";
+            $battelfild[8] = "Лес";
+            shuffle($battelfild);
+        }
+        return $battelfild;
+    }
     public static function getArrDeck()
     {
         static $arrDeck = null;
@@ -81,6 +95,7 @@ class Randomaizer extends \Core\Model\Request
         }
         return $arrDeck;
     }
+
 
 
 
