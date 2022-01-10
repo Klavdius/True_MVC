@@ -12,7 +12,7 @@ return [
             ],
             'header'=>[
                 'type' => '\\Core\\Block\\Template',
-                'template' => 'page/header.phtml'
+                'template' =>'page/header.phtml'
             ],
             'content'=>[
                 'type'=> '\\Core\\Block\\Template',
