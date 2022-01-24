@@ -4,11 +4,11 @@ namespace App\View\Block\dbActive;
 
 class dbMvcConnect
 {
-    public $dsn = 'mysql:dbname=dbMVC;host=127.0.0.1';
-    public $user = 'root';
-    public $password = null;
+    private $dsn = 'mysql:dbname=dbMvc;host=127.0.0.1';
+    private $user = 'admin';
+    private $password = 23;
 
-    public $pdoMVC;
+    private $pdoMVC;
 
     public function __construct()
     {

@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <body>
-База данных dbList
+База данных <br>
+Шаг первый. - Создание таблиц базы данный. Create table. <br>
+Первое поле id будет создаваться автоматически. <br>
+Минимум две колонки. Так же указывать тип колонки. <br>
+Нужно добавлять поля и тип колонки выбирать из списка. <br>
 <br>
 
+<br>
 
-<?php
-   echo $this->getPDO();
-?>
+<div id="idDivTarget">
+
+
+</div>
+    <input id="idNewColl" value="Новая колонка" name="newCollum" type="submit" onclick="return false"><br>
+<br>
+<input id="idCreate" value="Создать БД" name="btnCreate" type="submit" onclick="return false"> <br>
+
+<script type="text/javascript">
+    $('#idNewColl').on('click',function(){
+        var newCollum = 'newCollum';
+        $.ajax({
+            type: 'POST',
+            url: '/db/Connect',
+            data: {action:newCollum},
+            success: function(output) {
+                $('#idDivTarget').append(output);
+                // location.reload();
+            }
+        });
+    });
+</script>
+
+
 </body>
 </html>
 <br>
