@@ -11,27 +11,61 @@
 
 <br>
 
+<input type="text" id="idNameTable" placeholder="Название новой таблицы" autocomplete="off"><br><br>
+В вашей таблице будет
+<!--    <input id="idNewColl" value="" name="newCollum" type="submit" onclick="return false">-->
+        <select name="numCollun" id="idSelectCollum">
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    var inputForSelect = 'inputForSelect';
+                    $.ajax({
+                        type: 'POST',
+                        url: '/db/Connect',
+                        data: {action:inputForSelect},
+                        success:function(output){
+                            $('#idSelectCollum').append(output);
+                        },
+                        error:function () {
+                            $('#idSelectCollum').text('404');
+                        }
+                    });
+                });
+
+
+                $('#idSelectCollum').on('change',function(){
+                    $('#idDivTarget').empty();
+                    var item = $(this).val();
+                    var newCollum = 'newCollum';
+                    $.ajax({
+                        type: 'POST',
+                        url: '/db/Connect',
+                        data: {action:newCollum, value:item},
+                        success: function(output) {
+                            $('#idDivTarget').append(output);
+                        }
+                    });
+                });
+            </script>
+
+        </select>
+колонок<br>
+<br>
+
+
 <div id="idDivTarget">
 
 
 </div>
-    <input id="idNewColl" value="Новая колонка" name="newCollum" type="submit" onclick="return false"><br>
-<br>
-<input id="idCreate" value="Создать БД" name="btnCreate" type="submit" onclick="return false"> <br>
+<input id="idCreate" value="Создать таблицу" name="btnCreate" type="submit" onclick="return false"> <br>
 
 <script type="text/javascript">
-    $('#idNewColl').on('click',function(){
-        var newCollum = 'newCollum';
-        $.ajax({
-            type: 'POST',
-            url: '/db/Connect',
-            data: {action:newCollum},
-            success: function(output) {
-                $('#idDivTarget').append(output);
-                // location.reload();
-            }
-        });
+    $('#idCreate').on('click',function () {
+
+
+
     });
+
+
 </script>
 
 

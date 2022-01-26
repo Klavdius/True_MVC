@@ -18,9 +18,11 @@ class dbController extends \Core\Controller\Controller
         $dbC = new dbConnect();
         if(!empty($_POST['action'])) {
             $action = $_POST['action'];
+            $value = $_POST['value'];
             switch($action) {
-                case 'newCollum' : $dbC->newCollum();break;
-
+                case 'newCollum' : $dbC->newCollum($value);break;
+                case 'inputForSelect' : $dbC->inputForSelect();break;
+                case 'notEmptyTable' : $dbC->notEmptyTable($value);break;
             }
         }
 
