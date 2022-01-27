@@ -38,9 +38,9 @@ class dbConnect extends \Core\Block\Template
         for($i = 0;$i < $value; $i++)
         {
             $this->contentNewTable = $this->contentNewTable . '<br>
-        <input id="idNameCollum' . $this->getNumber().'" placeholder="Название столбца"  type="text" autocomplete="off" >
+        <input id="idNameCollum' . $this->getNumber().'" data-flag="flag" placeholder="Название столбца"  type="text" autocomplete="off" >
 
-        <select name="select'.$this->getNumber().'">
+        <select name="select'.$this->getNumber().'" data-flag="flag" >
             <option selected disabled value="nope"> выбирите тип данных</option>
             <option value="FLOAT"> дробное</option>
             <option value="INT">числовая</option>
@@ -65,7 +65,26 @@ class dbConnect extends \Core\Block\Template
         echo $this->contentSelect;
     }
 
-    public function notEmptyTable($emptyNumber){
+    public function creatNewTable($tableName,$arrInput,$arrSelect)
+    {
+        $ni = 0;
+        $ns = 0;
+        $stitch = "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY";
+        foreach($arrInput as &$ni){
+            foreach ($arrSelect as &$ns){
+                $stitch =$stitch . $ni.$ns.",";
+            }
+        }
 
+        echo $stitch;
     }
+//        $sql = 'CREATE TABLE' . $tableName.'('.
+//
+//
+//
+//        '
+//        $record = $this->myPdo->prepare('CREATE TABLE'. $tableName.'('.i1 .s1. .i2. s2. .i3 .s3     ')');
+//
+//    }
+
 }

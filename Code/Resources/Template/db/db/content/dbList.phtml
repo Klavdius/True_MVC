@@ -15,37 +15,7 @@
 В вашей таблице будет
 <!--    <input id="idNewColl" value="" name="newCollum" type="submit" onclick="return false">-->
         <select name="numCollun" id="idSelectCollum">
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    var inputForSelect = 'inputForSelect';
-                    $.ajax({
-                        type: 'POST',
-                        url: '/db/Connect',
-                        data: {action:inputForSelect},
-                        success:function(output){
-                            $('#idSelectCollum').append(output);
-                        },
-                        error:function () {
-                            $('#idSelectCollum').text('404');
-                        }
-                    });
-                });
 
-
-                $('#idSelectCollum').on('change',function(){
-                    $('#idDivTarget').empty();
-                    var item = $(this).val();
-                    var newCollum = 'newCollum';
-                    $.ajax({
-                        type: 'POST',
-                        url: '/db/Connect',
-                        data: {action:newCollum, value:item},
-                        success: function(output) {
-                            $('#idDivTarget').append(output);
-                        }
-                    });
-                });
-            </script>
 
         </select>
 колонок<br>
@@ -58,17 +28,66 @@
 </div>
 <input id="idCreate" value="Создать таблицу" name="btnCreate" type="submit" onclick="return false"> <br>
 
+
 <script type="text/javascript">
-    $('#idCreate').on('click',function () {
-
-
-
+    $(document).ready(function(){
+        var inputForSelect = 'inputForSelect';
+        $.ajax({
+            type: 'POST',
+            url: '/db/Connect',
+            data: {action:inputForSelect},
+            success:function(output){
+                $('#idSelectCollum').append(output);
+            },
+            error:function () {
+                $('#idSelectCollum').text('404');
+            }
+        });
     });
 
 
+    $('#idSelectCollum').on('change',function(){
+        $('#idDivTarget').empty();
+        var item = $(this).val();
+        var newCollum = 'newCollum';
+        $.ajax({
+            type: 'POST',
+            url: '/db/Connect',
+            data: {action:newCollum, value:item},
+            success: function(output) {
+                $('#idDivTarget').append(output);
+            }
+        });
+    });
+
+    $('#idCreate').on('click',function ()
+    {
+        var tableName = $('#idNameTable').val();
+        var creatNewTable = "creatNewTable";
+        var arrInput=[];
+        var arrSelect=[];
+        $("input[data-flag]").each(function(i)
+        {
+            arrInput.push($(this).val());
+        });
+        $("select[data-flag]").each(function(i)
+        {
+            arrSelect.push($(this).val());
+        });
+        // console.log(arrInput);
+        // console.log(arrInput.length);
+        // console.log(arrSelect);
+        // console.log(arrSelect.length);
+        $.ajax({
+            type: 'POST',
+            url: '/db/Connect',
+            data: {action:creatNewTable, tableName:tableName, arrInput:arrInput, arrSelect:arrSelect},
+            success: function (output) {
+                $('#idDivTarget').append(output);
+            }
+        });
+    });
 </script>
-
-
 </body>
 </html>
 <br>
