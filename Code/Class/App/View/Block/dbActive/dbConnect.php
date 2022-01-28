@@ -69,22 +69,15 @@ class dbConnect extends \Core\Block\Template
     {
         $ni = 0;
         $ns = 0;
-        $stitch = "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY";
+        $prepareArray = [];
+        $firstId = "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY";
         foreach($arrInput as &$ni){
-            foreach ($arrSelect as &$ns){
-                $stitch =$stitch . $ni.$ns.",";
-            }
+            array_push($prepareArray,($ni. " " . array_shift($arrSelect))) ;
         }
-
-        echo $stitch;
+        $prepareArray = implode(",",$prepareArray);
+        echo $prepareArray;
+        $n1 = 'CREATE TABLE' .' ' . $tableName. ' (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY ,'. $prepareArray .' )';
+        $this->myPdo->query($n1);
+//        echo $prepareArray;
     }
-//        $sql = 'CREATE TABLE' . $tableName.'('.
-//
-//
-//
-//        '
-//        $record = $this->myPdo->prepare('CREATE TABLE'. $tableName.'('.i1 .s1. .i2. s2. .i3 .s3     ')');
-//
-//    }
-
 }
