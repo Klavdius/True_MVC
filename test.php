@@ -1,7 +1,7 @@
 <?php
 include_once 'Code/Route.php';
 
-$pdo = new PDO('mysql:dbname=sample_book_database;host=127.0.0.1', 'root', 'root');
+$pdo = App::getDbConnection()->getAdapter();
 use Core\Model\Db\Sql\Search\Filter;
 use Core\Model\Db\Sql\Search\FilterGroup;
 use Core\Model\Db\Sql\Search\Expression;
