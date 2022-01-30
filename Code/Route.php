@@ -11,10 +11,26 @@ spl_autoload_register(function ($className) {
     }
 });
 
+class App
+{
+    private static \Core\Model\Db\Connection $dbConnection;
+
+    public static function getDbConnection(): \Core\Model\Db\Connection
+    {
+        if (!isset(self::$dbConnection)) {
+            self::$dbConnection = new \Core\Model\Db\Connection();
+        }
+        return self::$dbConnection;
+    }
+
+    public static function run()
+    {
+        Route::Run();
+    }
+}
 
 class Route
 {
-
     public static function Run()
     {
         $dispatcher = new \Core\Controller\Front();
