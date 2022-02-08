@@ -24,6 +24,10 @@ class Request
         $url = explode('?',$url);
         $arrUrl = explode('/', $url[0]);
 
+        while(count($arrUrl) > 2)
+        {
+            $i = array_shift($arrUrl);
+        }
         $this->controllerName = (!empty($arrUrl[0])) ? array_shift($arrUrl) : 'Default';
         $this->actionName = (!empty($arrUrl[0])) ? array_shift($arrUrl) : 'default';
 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+<body>
+База данных <br>
+Шаг первый. - Создание таблиц базы данный. Create table. <br>
+Первое поле id будет создаваться автоматически. <br>
+Минимум две колонки. Так же указывать тип колонки. <br>
+Нужно добавлять поля и тип колонки выбирать из списка. <br>
+<br>
+
+<br>
+
+<input type="text" id="idNameTable" placeholder="Название новой таблицы" autocomplete="off"><br><br>
+В вашей таблице будет
+<!--    <input id="idNewColl" value="" name="newCollum" type="submit" onclick="return false">-->
+<select name="numCollun" id="idSelectCollum">
+
+
+</select>
+колонок<br>
+<br>
+
+
+<div id="idDivTarget">
+
+
+</div>
+<input id="idCreate" value="Создать таблицу" name="btnCreate" type="submit" onclick="return false"> <br>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            type: 'POST',
+            url: '/dbCreate/Connect',
+            data: {action:'inputForSelect'},
+            success:function(output){
+                $('#idSelectCollum').append(output);
+            },
+            error:function () {
+                $('#idSelectCollum').text('404');
+            }
+        });
+    });
+
+
+    $('#idSelectCollum').on('change',function(){
+        $('#idDivTarget').empty();
+        var item = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: '/dbCreate/Connect',
+            data: {action:'newCollum', value:item},
+            success: function(output) {
+                $('#idDivTarget').append(output);
+            }
+        });
+    });
+
+    $('#idCreate').on('click',function ()
+    {
+        var tableName = $('#idNameTable').val();
+        var arrInput=[];
+        var arrSelect=[];
+        $("input[data-flag]").each(function(i)
+        {
+            arrInput.push($(this).val());
+        });
+        $("select[data-flag]").each(function(i)
+        {
+            arrSelect.push($(this).val());
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/dbCreate/Connect',
+            data: {action:'creatNewTable', tableName:tableName, arrInput:arrInput, arrSelect:arrSelect},
+            success: function (output) {
+                $('#idDivTarget').append(output);
+            }
+        });
+    });
+</script>
+
+<br>
+<br>
+<a href="db/db" class="btn">Назад</a>
+</body>
+</html>
+<br>
+<br>

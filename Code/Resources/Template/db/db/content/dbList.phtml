@@ -1,94 +1,65 @@
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>База данных</title>
+    <style>
+        .btn {
+            display: inline-block;
+            background: #8C959D;
+            color: #fff;
+            margin-bottom: 5px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+    </style>
+</head>
 <body>
-База данных <br>
-Шаг первый. - Создание таблиц базы данный. Create table. <br>
-Первое поле id будет создаваться автоматически. <br>
-Минимум две колонки. Так же указывать тип колонки. <br>
-Нужно добавлять поля и тип колонки выбирать из списка. <br>
-<br>
-
-<br>
-
-<input type="text" id="idNameTable" placeholder="Название новой таблицы" autocomplete="off"><br><br>
-В вашей таблице будет
-<!--    <input id="idNewColl" value="" name="newCollum" type="submit" onclick="return false">-->
-        <select name="numCollun" id="idSelectCollum">
-
-
-        </select>
-колонок<br>
-<br>
-
 
 <div id="idDivTarget">
 
 
 </div>
-<input id="idCreate" value="Создать таблицу" name="btnCreate" type="submit" onclick="return false"> <br>
+
 
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        var inputForSelect = 'inputForSelect';
+    $(document).ready(function (){
         $.ajax({
             type: 'POST',
             url: '/db/Connect',
-            data: {action:inputForSelect},
-            success:function(output){
-                $('#idSelectCollum').append(output);
+            data: {action:'showTable'},
+            success:function (output) {
+                $('#idDivTarget').text(output);
             },
             error:function () {
-                $('#idSelectCollum').text('404');
+                $('#idDivTarget').text('404');
             }
         });
     });
 
 
-    $('#idSelectCollum').on('change',function(){
-        $('#idDivTarget').empty();
-        var item = $(this).val();
-        var newCollum = 'newCollum';
-        $.ajax({
-            type: 'POST',
-            url: '/db/Connect',
-            data: {action:newCollum, value:item},
-            success: function(output) {
-                $('#idDivTarget').append(output);
-            }
-        });
-    });
 
-    $('#idCreate').on('click',function ()
-    {
-        var tableName = $('#idNameTable').val();
-        var creatNewTable = "creatNewTable";
-        var arrInput=[];
-        var arrSelect=[];
-        $("input[data-flag]").each(function(i)
-        {
-            arrInput.push($(this).val());
-        });
-        $("select[data-flag]").each(function(i)
-        {
-            arrSelect.push($(this).val());
-        });
-        // console.log(arrInput);
-        // console.log(arrInput.length);
-        // console.log(arrSelect);
-        // console.log(arrSelect.length);
-        $.ajax({
-            type: 'POST',
-            url: '/db/Connect',
-            data: {action:creatNewTable, tableName:tableName, arrInput:arrInput, arrSelect:arrSelect},
-            success: function (output) {
-                $('#idDivTarget').append(output);
-            }
-        });
-    });
+
+
 </script>
+
+
+
+<br>
+<a href="dbCreate/dbCreate" class="btn">Создать новую таблицу</a>
+
 </body>
 </html>
 <br>
-<br>
+
+
+
+
+
+
+
+
+

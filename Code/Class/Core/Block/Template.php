@@ -6,8 +6,11 @@ class Template
 {
     const TEMPLATE_PATH = 'Code/Resources/Template';
 
+
+
     private $template;
     private $children = [];
+
 
     public function getTemplate()
     {
