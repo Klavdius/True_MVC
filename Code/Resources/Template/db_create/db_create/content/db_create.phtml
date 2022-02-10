@@ -78,6 +78,7 @@
             data: {action:'creatNewTable', tableName:tableName, arrInput:arrInput, arrSelect:arrSelect},
             success: function (output) {
                 $('#idDivTarget').append(output);
+                window.location = 'db/db';
             }
         });
     });

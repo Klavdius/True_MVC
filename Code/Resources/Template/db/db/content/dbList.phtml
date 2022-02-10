@@ -25,6 +25,16 @@
 
 
 
+<br>
+<input id="idShowTable" value="выбрать" name="btnShow" type="submit" onclick="return false"> <br><br>
+
+
+<a href="dbCreate/dbCreate" class="btn">Создать новую таблицу</a>
+
+<div id="idDivShowTable">
+
+</div>
+
 <script type="text/javascript">
     $(document).ready(function (){
         $.ajax({
@@ -32,24 +42,25 @@
             url: '/db/Connect',
             data: {action:'showTable'},
             success:function (output) {
-                $('#idDivTarget').text(output);
+                $('#idDivTarget').append(output);
             },
             error:function () {
                 $('#idDivTarget').text('404');
             }
         });
     });
-
-
-
-
-
+    $('#idShowTable').on('click',function(){
+       var tableName = $('#idSelectTableShow').val();
+       $.ajax({
+           type: 'POST',
+           url: '/db/Connect',
+           data:{action:'tableShow',tableName:tableName},
+           success:function (output) {
+                $('#idDivShowTable').append(output);
+           }
+       });
+    });
 </script>
-
-
-
-<br>
-<a href="dbCreate/dbCreate" class="btn">Создать новую таблицу</a>
 
 </body>
 </html>

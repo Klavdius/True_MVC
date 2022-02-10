@@ -67,8 +67,6 @@ class dbCreateConnect extends \Core\Block\Template
 
     public function creatNewTable($tableName,$arrInput,$arrSelect)
     {
-        $ni = 0;
-        $ns = 0;
         $prepareArray = [];
         $firstId = "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY";
         foreach($arrInput as &$ni){

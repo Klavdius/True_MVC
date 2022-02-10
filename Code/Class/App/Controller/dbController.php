@@ -18,8 +18,12 @@ class dbController extends \Core\Controller\Controller
         if(!empty($_POST['action']))
         {
             $action = $_POST['action'];
+            if(!empty($_POST['tableName'])){
+                $tableName = $_POST['tableName'];
+            }
             switch ($action){
                 case 'showTable' : $dbC->showTable();break;
+                case 'tableShow' :$dbC->tableShow($tableName);
             }
         }
     }

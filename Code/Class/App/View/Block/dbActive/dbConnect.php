@@ -19,10 +19,40 @@ class dbConnect extends \Core\Block\Template
     {
         $command = 'SHOW TABLES  FROM `dbmvc`';
         $res =  $this->myPdo->query($command)->fetchAll($this->myPdo::FETCH_COLUMN);
-        foreach ($res as $value)
-        {
-            $res2 = (!empty($res2))? ($res2 = $res2 . ", " . $value): ($res2= $value) ;
+        $optionArr=null;
+        foreach ($res as $value){
+            $optionArr=$optionArr.'
+            <option value="'.$value.'">'.$value.' </option>
+            ';
         }
-        echo $res2;
+        $arrBtn=null;
+        $arrBtn=$arrBtn . '<br>
+        <select id="idSelectTableShow" name="selectTable" size="'.count($res).'" data-show="show">'.$optionArr.
+
+        '</select>
+        ';
+        echo $arrBtn;
+    }
+
+    public function tableShow($tableName){
+        $command = 'SELECT * FROM '. $tableName;
+        $result = $this->myPdo->query($command)->fetchAll($this->myPdo::FETCH_ASSOC);
+        $resultKey = $result[0];
+        $tableKey = [];
+        foreach ($resultKey as $needKey){
+            array_push($tableKey,array_search($needKey,$resultKey));
+        }
+        foreach($tableKey as $runner){
+            echo $runner . " ";
+        }
+        echo '<br>';
+        foreach ($result as $runner){
+           foreach ($runner as $value){
+               echo $value . " ";
+           }
+           echo "<br>";
+
+        }
+
     }
 }
